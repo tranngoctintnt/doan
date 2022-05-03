@@ -1,0 +1,90 @@
+.card {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  box-shadow: 0 0 5px #ddd;
+}
+
+.card .card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card .user {
+  display: flex;
+  gap: 1rem;
+}
+
+.card .card_header .dropdown-menu {
+  border-radius: 10px;
+  width: 200px;
+  position: absolute;
+  left: inherit !important;
+  right: 0;
+}
+
+.card .card_header .dropdown-item {
+  display: flex;
+  margin: 5px 0;
+  /* padding: 3px; */
+}
+
+.card .card-body{
+    /* width: 100%;
+    max-height: 526px; */
+    padding: 0 !important;
+}
+
+.card .card-body .photo {
+    /* width: 526px; */
+    /* height: 100%; */
+    object-fit: cover;
+    border-radius: var(--card-border-radius);
+    /* overflow: hidden; */
+    margin: 0.7rem 0;
+}
+
+.card_footer .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    margin: 0.6rem;
+}
+
+.card_footer .action-buttons .interaction--buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.action-buttons .interaction--buttons span:not(:first-child){
+    margin-left: 12px;
+}
+
+.card_footer .liked-by {
+    margin: 0 0.6rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_footer .card_footer-content{
+  font-size: 1rem;
+  margin: 0 0.6rem;
+}
+
+.card_footer .card_footer-content .readMore {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .card .card_header .dropdown-menu {
+    
+  }
+}

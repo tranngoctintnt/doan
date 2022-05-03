@@ -1,0 +1,160 @@
+/* * {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+/* 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+/* #theme {
+    display: none;
+}
+
+#theme:checked~.App {
+    filter: invert(1);
+} */
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
+  /* background: var(--color-light); */
+}
+
+.main {
+  width: 100%;
+  /* min-height: 100vh; */
+  /* max-width: 1200px; */
+  margin: auto;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --primary-color-hue: 252;
+  --dark-color-lightness: 17%;
+  --light-color-lightness: 95%;
+
+  --color-dark: hsl(252, 30%, var(--dark-color-lightness));
+  --color-white: hsl(252, 30%, 100%);
+  --color-light: hsl(252, 30%, var(--light-color-lightness));
+  --color-gray: hsl(252, 10%, 65%);
+  --color-primary: hsl(var(--primary-color-hue), 75%, 60%);
+  --color-secondary: hsl(252, 100%, 90%);
+  --color-success: hsl(120, 95%, 65%);
+  --color-danger: hsl(0, 95%, 65%);
+  --color-black: hsl(252, 30%, 10%);
+
+  --border-radius: 2rem;
+  --card-border-radius: 1rem;
+  --btn-padding: 0.3rem 1rem;
+  --search-padding: 0.6rem 1rem;
+  --card-padding: 1rem;
+
+  --sticky-top-left: 5.4rem;
+  --sticky-top-right: -18rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-dark);
+  background: var(--color-light);
+  overflow-x: hidden;
+}
+
+.container {
+  /* width: 60%; */
+  margin: 0 auto;
+}
+
+.navbar-container {
+  /* width: 80%; */
+  margin: 0;
+}
+
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--btn-padding);
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 300ms ease;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* .btn-primary {
+    background: var(--color-primary);
+    color: white;
+} */
+
+.text-bold {
+  font-weight: 500;
+}
+
+.text-muted {
+  color: var(--color-gray);
+}
+
+
+/* =============LOADING============ */
+@import url('./loading.css');
+/* =========LOGIN================= */
+@import url('./login.css');
+
+/* =========REGISTER============= */
+
+/* ===================HEADER=========== */
+@import url('./header.css');
+
+/* ===================AVATAR=========== */
+@import url('./avatar.css');
+
+/* ===================PROFILE=========== */
+@import url('./profile.css');
+
+@import url('./editProfile.css');
+
+/* ==================HOME================ */
+@import url('./home.css');
+
+/* ==============Status============== */
+@import url('./status_modal.css');
+
+/* ==============POSTS============== */
+@import url('./post.css');
+
+/* ==============COMMENT============== */
+@import url('./comment.css');
+
+/* =============ICONS============== */
+@import url('./icons.css');
