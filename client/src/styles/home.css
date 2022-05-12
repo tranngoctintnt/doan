@@ -1,5 +1,5 @@
 .home{
-    /* width: 60%; */
+    width: 60%;
 }
 .create-status {
     width: 100%;
@@ -28,6 +28,9 @@
 
 /* ===============RESPONSIVE========== */
 @media screen and (max-width: 768px) {
+    .home{
+        width: 100%;
+    }
     .create-status .statusBtn {
         padding:16px;
     }

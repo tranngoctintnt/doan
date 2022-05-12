@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { createComment } from '../../redux/actions/commentAction';
+import { createComment } from '../../redux/actions/commentAction';
 import Icons from '../Icons';
 
 const InputComment = ({ children, post, onReply, setOnReply }) => {
@@ -27,7 +27,7 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
       tag: onReply && onReply.user,
     };
 
-    // dispatch(createComment({ post, newComment, auth, socket }));
+    dispatch(createComment({ post, newComment, auth, socket }));
 
     if (setOnReply) return setOnReply(false);
   };
@@ -42,13 +42,9 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
         placeholder="Add your comments..."
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        style={{
-          color: theme ? 'white' : '#111',
-          background: theme ? 'rgba(0,0,0,.03)' : '',
-        }}
       />
 
-      <button type="submit" className="postBtn">
+      <button type="submit" className="postBtn mr-2">
         Post
       </button>
     </form>

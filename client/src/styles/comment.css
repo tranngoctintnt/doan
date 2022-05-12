@@ -1,10 +1,19 @@
+.card-footer{
+    background-color: white;
+    margin-top: 8px;
+    padding: 0.3rem 0;
+}
+
 .comment_input {
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
 .comment_input input {
-    background: #f7f7f7;
+    font-size: 1rem;
+    /* padding: 0.5rem 0; */
+    background: white;
     border: none;
     outline: none;
     flex: 1;
@@ -14,28 +23,36 @@
 .comment_input .postBtn {
     border: none;
     outline: none;
-    background: #f7f7f7;
+    background: white;
     color: blue;
     font-weight: 600;
 }
 
 .comment_input .dropdown-menu {
-    transform: translate3d(-120px, -200px, 0px) !important;
+    transform: translate3d(-1px, -205px, 0px) !important
 }
 
 /* ---------- Comments ---------- */
 .comment_display {
-    padding: 10px 25px;
+    padding: 5px 10px;
 }
 
 .comment_card .comment_content {
-    background: #eee;
+    /* background: #eee; */
     padding: 7px;
     border-radius: 10px;
     border-top-left-radius: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.comment_card .comment_content .flex-fill {
+    /* text-align:justify; */
+}
+
+.comment_card .comment_content i{
+    font-size: 1rem;
 }
 
 .comment_card .comment_content .readMore {
@@ -64,7 +81,10 @@
 }
 
 .comment_card .comment_content textarea {
+    border: 2px solid rgba(0, 0, 0, .125);
+    box-shadow: 0 0 10px #ddd;
+    padding: 2px 8px;
     width: 100%;
-    border: none;
+    /* border: none; */
     outline: none;
 }

@@ -1,0 +1,19 @@
+.detail{
+    width: 70%;
+    display: flex;
+    padding: 0;
+    flex-direction: row;
+}
+
+/* ==============RESPONSIVE============== */
+
+@media screen and (max-width: 768px) {
+    .posts {
+        padding-bottom: 4rem;
+    }
+    .detail{
+        width: 95%;
+        flex-direction: column;
+        grid-gap: 0rem;
+    }
+}

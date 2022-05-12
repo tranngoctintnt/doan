@@ -41,7 +41,7 @@ const Icons = ({ setContent, content, theme }) => {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <span style={{ opacity: 0.4 }}>😄</span>
+        <span style={{ opacity: 0.4, fontSize: '24px' }}>😄</span>
       </span>
 
       <div className="dropdown-menu" aria-labelledby="navbarDropdown">

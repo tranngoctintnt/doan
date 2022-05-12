@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import CommentDisplay from './comments/CommentDisplay';
+import CommentDisplay from './comments/CommentDisplay';
 
 const Comments = ({ post }) => {
   const [comments, setComments] = useState([]);
@@ -21,14 +21,14 @@ const Comments = ({ post }) => {
 
   return (
     <div className="comments">
-      {/* {showComments.map((comment, index) => (
+      {showComments.map((comment, index) => (
         <CommentDisplay
           key={index}
           comment={comment}
           post={post}
           replyCm={replyComments.filter((item) => item.reply === comment._id)}
         />
-      ))} */}
+      ))}
 
       {comments.length - next > 0 ? (
         <div

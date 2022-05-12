@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { likePost, unLikePost, savePost, unSavePost } from '../../../redux/actions/postAction';
 import LikeButton from '../../LikeButton';
+import ShareModal from '../../ShareModal';
+import { BASE_URL } from '../../../utils/config';
 
 const CardFooter = ({ post }) => {
   const [readMore, setReadMore] = useState(false);
@@ -12,7 +14,7 @@ const CardFooter = ({ post }) => {
 
   const [isShare, setIsShare] = useState(false);
 
-  const { auth, theme, socket } = useSelector((state) => state);
+  const { auth, socket } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [saved, setSaved] = useState(false);
@@ -43,6 +45,31 @@ const CardFooter = ({ post }) => {
     setLoadLike(false);
   };
 
+  // Saved
+  // useEffect(() => {
+  //   if (auth.user.saved.find((id) => id === post._id)) {
+  //     setSaved(true);
+  //   } else {
+  //     setSaved(false);
+  //   }
+  // }, [auth.user.saved, post._id]);
+
+  // const handleSavePost = async () => {
+  //   if (saveLoad) return;
+
+  //   setSaveLoad(true);
+  //   await dispatch(savePost({ post, auth }));
+  //   setSaveLoad(false);
+  // };
+
+  // const handleUnSavePost = async () => {
+  //   if (saveLoad) return;
+
+  //   setSaveLoad(true);
+  //   await dispatch(unSavePost({ post, auth }));
+  //   setSaveLoad(false);
+  // };
+
   return (
     <div className="card_footer">
       <div className="action-buttons">
@@ -55,7 +82,7 @@ const CardFooter = ({ post }) => {
           </span>
 
           <span>
-            <i className="fa-regular fa-paper-plane"></i>{' '}
+            <i className="fa-regular fa-paper-plane" onClick={() => setIsShare(!isShare)}></i>
           </span>
         </div>
 
@@ -91,6 +118,8 @@ const CardFooter = ({ post }) => {
           </span>
         )}
       </div>
+
+      {isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} />}
     </div>
   );
 };

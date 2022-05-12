@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
-// import '../styles/login.css';
 import wave from '../images/wave.png';
 import bg from '../images/bg.svg';
 import avatar from '../images/avatar.svg';

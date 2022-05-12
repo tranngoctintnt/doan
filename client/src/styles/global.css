@@ -128,10 +128,9 @@ img {
 
 /* =============LOADING============ */
 @import url('./loading.css');
+
 /* =========LOGIN================= */
 @import url('./login.css');
-
-/* =========REGISTER============= */
 
 /* ===================HEADER=========== */
 @import url('./header.css');
@@ -158,3 +157,10 @@ img {
 
 /* =============ICONS============== */
 @import url('./icons.css');
+
+
+/* ===============POST THUMB=============== */
+@import url('./post_thumb.css');
+
+/* ===============POST DETAIL=============== */
+@import url('./postDetail.css');

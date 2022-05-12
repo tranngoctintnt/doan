@@ -259,7 +259,7 @@ form input[type="radio"] {
 
 @media screen and (max-width: 1050px) {
     .container {
-        grid-gap: 5rem;
+        /* grid-gap: 5rem; */
     }
 }
 
@@ -279,8 +279,9 @@ form input[type="radio"] {
 }
 
 @media screen and (max-width: 900px) {
-    .container {
+    .container-login{
         grid-template-columns: 1fr;
+        /* display: inherit; */
     }
 
     .img {

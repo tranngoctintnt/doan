@@ -84,7 +84,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .card .card_header .dropdown-menu {
-    
+  .profile {
+      padding-bottom: 4rem;
   }
 }

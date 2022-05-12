@@ -14,7 +14,7 @@ const commentSchema = new mongoose.Schema(
     postUserId: mongoose.Types.ObjectId,
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
 
