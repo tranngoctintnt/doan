@@ -73,7 +73,7 @@ export const logout = () => async (dispatch) => {
   try {
     sessionStorage.removeItem('firstLogin');
     await postDataAPI('logout');
-    window.location.href = '/';
+    window.location.href = '/login';
   } catch (err) {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
   }

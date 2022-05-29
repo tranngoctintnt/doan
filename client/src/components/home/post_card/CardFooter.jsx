@@ -45,30 +45,30 @@ const CardFooter = ({ post }) => {
     setLoadLike(false);
   };
 
-  // Saved
-  // useEffect(() => {
-  //   if (auth.user.saved.find((id) => id === post._id)) {
-  //     setSaved(true);
-  //   } else {
-  //     setSaved(false);
-  //   }
-  // }, [auth.user.saved, post._id]);
+  // Saved;
+  useEffect(() => {
+    if (auth.user.saved.find((id) => id === post._id)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [auth.user.saved, post._id]);
 
-  // const handleSavePost = async () => {
-  //   if (saveLoad) return;
+  const handleSavePost = async () => {
+    if (saveLoad) return;
 
-  //   setSaveLoad(true);
-  //   await dispatch(savePost({ post, auth }));
-  //   setSaveLoad(false);
-  // };
+    setSaveLoad(true);
+    await dispatch(savePost({ post, auth }));
+    setSaveLoad(false);
+  };
 
-  // const handleUnSavePost = async () => {
-  //   if (saveLoad) return;
+  const handleUnSavePost = async () => {
+    if (saveLoad) return;
 
-  //   setSaveLoad(true);
-  //   await dispatch(unSavePost({ post, auth }));
-  //   setSaveLoad(false);
-  // };
+    setSaveLoad(true);
+    await dispatch(unSavePost({ post, auth }));
+    setSaveLoad(false);
+  };
 
   return (
     <div className="card_footer">
@@ -86,11 +86,19 @@ const CardFooter = ({ post }) => {
           </span>
         </div>
 
-        <div className="bookmark">
-          <span>
-            <i className="uil uil-bookmark"></i>
-          </span>
-        </div>
+        {saved ? (
+          <div style={{ cursor: 'pointer' }} className="bookmark">
+            <span>
+              <i className="fas fa-bookmark text-dark" onClick={handleUnSavePost}></i>
+            </span>
+          </div>
+        ) : (
+          <div style={{ cursor: 'pointer' }} className="bookmark">
+            <span>
+              <i className="far fa-bookmark" onClick={handleSavePost}></i>
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="liked-by">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Info from '../../components/profile/Info';
 import Posts from '../../components/profile/Posts';
+import Saved from '../../components/profile/Saved';
 import LoadIcon from '../../images/loading.gif';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfileUsers } from '../../redux/actions/profileAction';
@@ -35,13 +36,11 @@ const Profile = () => {
       )}
 
       {profile.loading ? (
-        <img className="d-block mx-auto" src={LoadIcon} alt="loading" />
+        <img className="d-block mx-auto" style={{ width: '88px' }} src={LoadIcon} alt="loading" />
       ) : (
         <>
           {saveTab ? (
-            {
-              /* <Saved auth={auth} dispatch={dispatch} /> */
-            }
+            <Saved auth={auth} dispatch={dispatch} />
           ) : (
             <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
           )}

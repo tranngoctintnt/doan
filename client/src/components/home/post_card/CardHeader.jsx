@@ -21,7 +21,7 @@ const CardHeader = ({ post }) => {
 
   const handleDeletePost = () => {
     dispatch(deletePost({ post, auth, socket }));
-    return history.push('/');
+    return history('/');
   };
 
   const handleCopyLink = () => {

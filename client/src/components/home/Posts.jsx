@@ -8,7 +8,7 @@ import { getDataAPI } from '../../utils/fetchData';
 import { POST_TYPES } from '../../redux/actions/postAction';
 
 const Posts = () => {
-  const { homePosts, auth, theme } = useSelector((state) => state);
+  const { homePosts, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [load, setLoad] = useState(false);
@@ -31,7 +31,9 @@ const Posts = () => {
         <PostCard key={post._id} post={post} />
       ))}
 
-      {load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />}
+      {load && (
+        <img src={LoadIcon} alt="loading" style={{ width: '88px' }} className="d-block mx-auto" />
+      )}
 
       <LoadMoreBtn
         result={homePosts.result}

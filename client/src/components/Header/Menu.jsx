@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/authAction';
-import Avatar from '../Avatar';
+import { savePost } from '../../redux/actions/postAction';
 
-import home1 from '../../images/home1.svg';
-import chat from '../../images/chat.svg';
-import explore from '../../images/explore.svg';
-import bell from '../../images/bell.svg';
+import Avatar from '../Avatar';
+import NotifyModal from '../NotifyModal';
+
+import home from '../../images/home.png';
+import message from '../../images/messenger.png';
+import explore from '../../images/explore.png';
+import bell from '../../images/bell.png';
 import user from '../../images/user.svg';
 import bookmark from '../../images/bookmark.svg';
 import logout1 from '../../images/logout.svg';
@@ -16,12 +19,12 @@ const Menu = () => {
   const navLinks = [
     {
       label: 'Home',
-      icon: <img src={home1} style={{ width: '32px', height: '32px' }} alt="home" />,
+      icon: <img src={home} style={{ width: '32px', height: '32px' }} alt="home" />,
       path: '/',
     },
     {
       label: 'Message',
-      icon: <img src={chat} style={{ width: '32px', height: '32px' }} alt="chat" />,
+      icon: <img src={message} style={{ width: '32px', height: '32px' }} alt="chat" />,
       path: '/message',
     },
     {
@@ -29,14 +32,15 @@ const Menu = () => {
       icon: <img src={explore} style={{ width: '32px', height: '32px' }} alt="explore" />,
       path: '/discover',
     },
-    {
-      label: 'Notify',
-      icon: <img src={bell} style={{ width: '32px', height: '32px' }} alt="bell" />,
-      path: '/notify',
-    },
+    // {
+    //   label: 'Notify',
+    //   icon: <img src={bell} style={{ width: '32px', height: '32px' }} alt="bell" />,
+    //   path: '/notify',
+    // },
   ];
 
-  const { auth } = useSelector((state) => state);
+  const { auth, notify } = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
@@ -53,7 +57,49 @@ const Menu = () => {
             </Link>
           </li>
         ))}
-        <li className="nav-item dropdown">
+
+        <li className="nav-item dropdown" style={{ marginRight: '6px', opacity: 1 }}>
+          <span
+            className="nav-link position-relative"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img
+              src={bell}
+              style={{
+                width: '32px',
+                height: '32px',
+                color: notify.data.length > 0 ? 'crimson' : '',
+              }}
+              alt="bell"
+            />
+            <h6
+              style={{
+                top: '4px',
+                right: '3px',
+                color: 'white',
+                width: '20px',
+                height: '20px',
+              }}
+              className="notify_length text-center rounded-circle bg-danger bg-gradient position-absolute"
+            >
+              {notify.data.length}
+            </h6>
+          </span>
+
+          <div
+            className="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+            style={{ transform: 'translateX(75px)' }}
+          >
+            <NotifyModal />
+          </div>
+        </li>
+
+        <li className="nav-item dropdown" style={{ opacity: 1 }}>
           <span
             className="nav-link"
             id="navbarDropdown"
@@ -71,7 +117,7 @@ const Menu = () => {
               Profile
             </Link>
 
-            <Link to="/" className="dropdown-item">
+            <Link to="/saved" className="dropdown-item">
               <img src={bookmark} style={{ width: '23px', height: '23px' }} alt="bookmark" />
               Bookmarks
             </Link>

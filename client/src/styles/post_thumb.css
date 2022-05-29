@@ -48,3 +48,9 @@
 .post_thumb_display .post_thumb_menu i span{
     margin-left: 5px;
 }
+
+@media screen and (max-width: 768px) {
+    .post_thumb{
+        margin-bottom: 68px;
+    }
+}

@@ -54,7 +54,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.6rem;
-    margin: 0.6rem;
+    margin:1px 0.6rem;
 }
 
 .card_footer .action-buttons .interaction--buttons{

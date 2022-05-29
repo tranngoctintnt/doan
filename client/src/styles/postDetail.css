@@ -1,3 +1,4 @@
+
 .detail{
     width: 70%;
     display: flex;
@@ -8,10 +9,11 @@
 /* ==============RESPONSIVE============== */
 
 @media screen and (max-width: 768px) {
-    .posts {
-        padding-bottom: 4rem;
+    .post {
+        padding-bottom: 68px;
     }
     .detail{
+        margin-bottom: 68px;
         width: 95%;
         flex-direction: column;
         grid-gap: 0rem;

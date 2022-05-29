@@ -38,7 +38,7 @@ const Posts = ({ auth, id, dispatch, profile }) => {
           src={LoadIcon}
           alt="loading"
           style={{ width: '50px', height: '50px' }}
-          className="d-block mx-auto"
+          className="d-block w-25 mx-auto"
         />
       )}
 

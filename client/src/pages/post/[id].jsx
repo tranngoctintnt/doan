@@ -24,8 +24,15 @@ const Post = () => {
   }, [detailPost, dispatch, id, auth]);
 
   return (
-    <div className="posts row container">
-      {post.length === 0 && <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />}
+    <div className="post row container">
+      {post.length === 0 && (
+        <img
+          src={LoadIcon}
+          alt="loading"
+          style={{ width: '88px' }}
+          className="d-block mx-auto my-4"
+        />
+      )}
 
       {post.map((item) => (
         <PostDetail key={item._id} post={item} />

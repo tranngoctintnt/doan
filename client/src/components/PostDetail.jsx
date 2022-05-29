@@ -10,7 +10,7 @@ import InputComment from './home/InputComment';
 const PostDetail = ({ post, setPostDetail }) => {
   return (
     <div className="card detail my-1 container">
-      <div className="col-md-6 left ">
+      <div className="col-md-6 ">
         <CardBody post={post} />
       </div>
 

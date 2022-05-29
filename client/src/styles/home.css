@@ -1,5 +1,5 @@
 .home{
-    width: 60%;
+    width: 65%;
 }
 .create-status {
     width: 100%;
@@ -30,6 +30,14 @@
 @media screen and (max-width: 768px) {
     .home{
         width: 100%;
+    }
+
+    .left{
+        margin-bottom: 68px;
+    }
+
+    .right{
+        display: none;
     }
     .create-status .statusBtn {
         padding:16px;

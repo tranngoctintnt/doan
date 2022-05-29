@@ -28,12 +28,19 @@ const Discover = () => {
   return (
     <div className="py-3">
       {discover.loading ? (
-        <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
+        <img
+          src={LoadIcon}
+          alt="loading"
+          style={{ width: '88px' }}
+          className="d-block mx-auto my-4"
+        />
       ) : (
         <PostThumb posts={discover.posts} result={discover.result} />
       )}
 
-      {load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />}
+      {load && (
+        <img src={LoadIcon} alt="loading" style={{ width: '88px' }} className="d-block mx-auto" />
+      )}
 
       {!discover.loading && (
         <LoadMoreBtn
