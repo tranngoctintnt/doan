@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
 import { deletePost } from '../../../redux/actions/postAction';
+import { deleteComment } from '../../../redux/actions/commentAction';
 import { BASE_URL } from '../../../utils/config';
 
 const CardHeader = ({ post }) => {
@@ -21,6 +22,7 @@ const CardHeader = ({ post }) => {
 
   const handleDeletePost = () => {
     dispatch(deletePost({ post, auth, socket }));
+
     return history('/');
   };
 

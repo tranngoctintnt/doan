@@ -1,4 +1,4 @@
-import { Outlet, Navigate, Redirect } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 
 const PrivateRouter = (props) => {
   const firstLogin = sessionStorage.getItem('firstLogin');

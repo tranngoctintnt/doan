@@ -29,7 +29,7 @@ export const imageUpload = async (images) => {
     formData.append('upload_preset', 'hztgx0te');
     formData.append('cloud_name', 'ngoctin');
 
-    const res = await fetch('https://api.cloudinary.com/v1_1/ngoctin/image/upload', {
+    const res = await fetch('https://api.cloudinary.com/v1_1/ngoctin/upload', {
       method: 'POST',
       body: formData,
     });

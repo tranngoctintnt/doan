@@ -1,6 +1,5 @@
 import { useEffect, Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import PageRender from './customRouter/PageRender';
@@ -23,6 +22,8 @@ import { GLOBALTYPES } from './redux/actions/globalTypes';
 import SocketClient from './SocketClient';
 
 import { getNotifies } from './redux/actions/notifyAction';
+import CallModal from './components/message/CallModal';
+import Peer from 'peerjs';
 
 function App() {
   const { auth, status, modal, call } = useSelector((state) => state);
@@ -56,14 +57,14 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const newPeer = new Peer(undefined, {
-  //     path: '/',
-  //     secure: true,
-  //   });
+  useEffect(() => {
+    const newPeer = new Peer(undefined, {
+      path: '/',
+      secure: true,
+    });
 
-  //   dispatch({ type: GLOBALTYPES.PEER, payload: newPeer });
-  // }, [dispatch]);
+    dispatch({ type: GLOBALTYPES.PEER, payload: newPeer });
+  }, [dispatch]);
 
 
   return (
@@ -73,13 +74,13 @@ function App() {
         {/* <input type="checkbox" id="theme" /> */}
         <div className="App">
           <div className="main">
-            {/* {!auth.token && <Login/>} */}
+            {/*  */}
             {auth.token && <Header />}
             {/* {auth.token && <Home />} */}
             {status && <StatusModal />}
             {auth.token && <SocketClient />}
+            {call && <CallModal />}
             <Routes>
-           
               <Route exact path="/" element={auth.token ? <Home /> : <Login />} />
 
               <Route exact path="/register" element={<Register />} />

@@ -38,12 +38,14 @@ export const createComment =
   };
 
 export const updateComment =
-  ({ comment, post, content, auth }) =>
+  ({ comment, post, content, auth, socket }) =>
   async (dispatch) => {
     const newComments = EditData(post.comments, comment._id, { ...comment, content });
     const newPost = { ...post, comments: newComments };
 
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+
+    socket.emit('updateComment', newPost);
     try {
       patchDataAPI(`comment/${comment._id}`, { content }, auth.token);
     } catch (err) {
@@ -52,15 +54,17 @@ export const updateComment =
   };
 
 export const likeComment =
-  ({ comment, post, auth }) =>
+  ({ comment, post, auth, socket }) =>
   async (dispatch) => {
     const newComment = { ...comment, likes: [...comment.likes, auth.user] };
 
     const newComments = EditData(post.comments, comment._id, newComment);
 
-    const newPost = { ...post, comments: newComments };
+    // const newPost = ;
 
-    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: { ...post, comments: newComments } });
+
+    // socket.emit('likeComment', newPost);
 
     try {
       await patchDataAPI(`comment/${comment._id}/like`, null, auth.token);
@@ -70,18 +74,30 @@ export const likeComment =
   };
 
 export const unLikeComment =
-  ({ comment, post, auth }) =>
+  ({ comment, post, auth, socket }) =>
   async (dispatch) => {
     const newComment = { ...comment, likes: DeleteData(comment.likes, auth.user._id) };
 
     const newComments = EditData(post.comments, comment._id, newComment);
 
-    const newPost = { ...post, comments: newComments };
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: { ...post, comments: newComments } });
 
-    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+    // socket.emit('unLikeComment', newComments);
 
     try {
       await patchDataAPI(`comment/${comment._id}/unlike`, null, auth.token);
+
+      // Notify
+      // const msg = {
+      //   id: auth.user._id,
+      //   text: 'like your comment.',
+      //   recipients: [post.user._id],
+      //   url: `/post/${post._id}`,
+      //   content: post.content,
+      //   image: post.images[0].url,
+      // };
+
+      // dispatch(createNotify({ msg, auth, socket }));
     } catch (err) {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
     }

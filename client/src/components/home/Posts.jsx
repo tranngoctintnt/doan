@@ -27,13 +27,12 @@ const Posts = () => {
 
   return (
     <div className="posts">
-      {homePosts.posts.map((post) => (
-        <PostCard key={post._id} post={post} />
-      ))}
-
       {load && (
         <img src={LoadIcon} alt="loading" style={{ width: '88px' }} className="d-block mx-auto" />
       )}
+      {homePosts.posts.map((post) => (
+        <PostCard key={post._id} post={post} />
+      ))}
 
       <LoadMoreBtn
         result={homePosts.result}

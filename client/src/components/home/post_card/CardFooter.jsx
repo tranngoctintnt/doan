@@ -127,6 +127,8 @@ const CardFooter = ({ post }) => {
         )}
       </div>
 
+      {/* <hr /> */}
+
       {isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} />}
     </div>
   );

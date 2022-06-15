@@ -7,6 +7,8 @@ import camera from '../images/camera.svg';
 import image from '../images/image.svg';
 
 import Avatar from './Avatar';
+import Icons from './Icons';
+import { imageShow, videoShow } from '../utils/mediaShow';
 
 const StatusModal = () => {
   const { auth, status, socket } = useSelector((state) => state);
@@ -26,16 +28,16 @@ const StatusModal = () => {
     let newImages = [];
 
     files.forEach((file) => {
-      if (!file) return (err = 'File does not exits.');
-      if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-        return (err = 'Image format not supported.');
+      if (!file) return (err = 'File does not exist.');
+
+      if (file.size > 1024 * 1024 * 5) {
+        return (err = 'The image/video largest is 5mb.');
       }
 
       return newImages.push(file);
     });
 
     if (err) dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } });
-
     setImages([...images, ...newImages]);
   };
 
@@ -126,9 +128,15 @@ const StatusModal = () => {
         <div className="status_body">
           <textarea
             name="content"
+            value={content}
             placeholder={`What's on your mind, ${auth.user.fullname} ?`}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
+
+          <div className="d-flex">
+            <div className="flex-fill"></div>
+            <Icons setContent={setContent} content={content} />
+          </div>
 
           <div className="show_images" id="style-1">
             {/* <div className="photo-upload-item mr-2 item__upload text-center p-0" tabindex="0">
@@ -143,12 +151,18 @@ const StatusModal = () => {
               <i className="fa-solid fa-plus photo-upload__action"></i>
             </div> */}
             {images.map((img, index) => (
-              <div key={index} id="file_img" className="mr-2">
-                <img
-                  src={img.camera ? img.camera : img.url ? img.url : URL.createObjectURL(img)}
-                  alt="images"
-                />
-
+              <div key={index} id="file_img">
+                {img.camera ? (
+                  imageShow(img.camera)
+                ) : img.url ? (
+                  <>{img.url.match(/video/i) ? videoShow(img.url) : imageShow(img.url)}</>
+                ) : (
+                  <>
+                    {img.type.match(/video/i)
+                      ? videoShow(URL.createObjectURL(img))
+                      : imageShow(URL.createObjectURL(img))}
+                  </>
+                )}
                 <span onClick={() => deleteImages(index)}>&times;</span>
               </div>
             ))}
@@ -188,7 +202,7 @@ const StatusModal = () => {
                     name="file"
                     id="file"
                     multiple
-                    accept="image/*"
+                    accept="image/*, video/*"
                     onChange={handleChangeImage}
                   />
                 </div>

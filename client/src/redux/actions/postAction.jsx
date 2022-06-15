@@ -22,12 +22,16 @@ export const createPost =
 
       const res = await postDataAPI('posts', { content, images: media }, auth.token);
 
+      const newPost = { ...res.data.newPost, user: auth.user };
+
       dispatch({
         type: POST_TYPES.CREATE_POST,
-        payload: { ...res.data.newPost, user: auth.user },
+        payload: newPost,
       });
 
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } });
+
+      socket.emit('createPost', newPost);
 
       // Notify
       const msg = {
@@ -48,17 +52,23 @@ export const createPost =
     }
   };
 
-export const getPosts = (token) => async (dispatch) => {
+export const getPosts = (token, socket) => async (dispatch) => {
   try {
     dispatch({ type: POST_TYPES.LOADING_POST, payload: true });
     const res = await getDataAPI('posts', token);
 
+    const newPost = { ...res.data, page: 2 };
+
     dispatch({
       type: POST_TYPES.GET_POSTS,
-      payload: { ...res.data, page: 2 },
+      payload: newPost,
     });
 
+    // socket.emit('getPost', newPost);
+
     dispatch({ type: POST_TYPES.LOADING_POST, payload: false });
+
+    // socket.emit('getPosts', newPost);
   } catch (err) {
     dispatch({
       type: GLOBALTYPES.ALERT,
@@ -182,6 +192,8 @@ export const deletePost =
   ({ post, auth, socket }) =>
   async (dispatch) => {
     dispatch({ type: POST_TYPES.DELETE_POST, payload: post });
+
+    socket.emit('deletePost', post);
 
     try {
       const res = await deleteDataAPI(`post/${post._id}`, auth.token);

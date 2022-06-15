@@ -6,21 +6,18 @@ const authCtrl = {
   register: async (req, res) => {
     try {
       const { fullname, username, email, password, gender } = req.body;
-
       let newUserName = username.toLowerCase().replace(/ /g, '');
 
       const user_name = await Users.findOne({ username: newUserName });
-      if (user_name) return res.status(400).json({ msg: 'User already exists' });
+      if (user_name) return res.status(400).json({ msg: 'This user name already exists.' });
 
       const user_email = await Users.findOne({ email });
-      if (user_email) return res.status(400).json({ msg: 'Email already exists' });
+      if (user_email) return res.status(400).json({ msg: 'This email already exists.' });
 
       if (password.length < 6)
-        return res
-          .status(400)
-          .json({ msg: 'Password too short. Password must be at least 6 characters' });
+        return res.status(400).json({ msg: 'Password must be at least 6 characters.' });
 
-      const passwordHash = await bcrypt.hashSync(password, 12);
+      const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = new Users({
         fullname,
@@ -36,7 +33,7 @@ const authCtrl = {
       res.cookie('refreshtoken', refresh_token, {
         httpOnly: true,
         path: '/api/refresh_token',
-        maxAge: 30 * 7 * 24 * 60 * 60 * 1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
       });
 
       await newUser.save();
@@ -57,12 +54,14 @@ const authCtrl = {
     try {
       const { email, password } = req.body;
 
-      const user = await Users.findOne({ email }).populate('followers following', '-password');
+      const user = await Users.findOne({ email }).populate(
+        'followers following',
+        'avatar username fullname followers following'
+      );
 
-      if (!user) return res.status(400).json({ msg: 'This email does not exists.' });
+      if (!user) return res.status(400).json({ msg: 'This email does not exist.' });
 
       const isMatch = await bcrypt.compare(password, user.password);
-
       if (!isMatch) return res.status(400).json({ msg: 'Password is incorrect.' });
 
       const access_token = createAccessToken({ id: user._id });
@@ -71,7 +70,7 @@ const authCtrl = {
       res.cookie('refreshtoken', refresh_token, {
         httpOnly: true,
         path: '/api/refresh_token',
-        maxAge: 30 * 7 * 24 * 60 * 60 * 1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
       });
 
       res.json({
@@ -89,7 +88,7 @@ const authCtrl = {
   logout: async (req, res) => {
     try {
       res.clearCookie('refreshtoken', { path: '/api/refresh_token' });
-      return res.json({ msg: 'Logged out' });
+      return res.json({ msg: 'Logged out!' });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -100,11 +99,11 @@ const authCtrl = {
       if (!rf_token) return res.status(400).json({ msg: 'Please login now.' });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, async (err, result) => {
-        if (err) return res.status(400).json({ msg: 'Error verifying refresh token' });
+        if (err) return res.status(400).json({ msg: 'Please login now.' });
 
         const user = await Users.findById(result.id)
           .select('-password')
-          .populate('followers following', '-password');
+          .populate('followers following', 'avatar username fullname followers following');
 
         if (!user) return res.status(400).json({ msg: 'This does not exist.' });
 

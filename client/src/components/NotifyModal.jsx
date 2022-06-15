@@ -22,18 +22,12 @@ const NotifyModal = () => {
     const newArr = notify.data.filter((item) => item.isRead === false);
     if (newArr.length === 0) return dispatch(deleteAllNotifies(auth.token));
 
-    if (
-      window.confirm(
-        `You have ${newArr.length} unread notices. Are you sure you want to delete all?`
-      )
-    ) {
-      return dispatch(deleteAllNotifies(auth.token));
-    }
+    return dispatch(deleteAllNotifies(auth.token));
   };
 
   return (
-    <div className="rounded" style={{ minWidth: '400px' }}>
-      <div className="d-flex justify-content-between align-items-center px-3">
+    <div className="rounded columns" style={{ minWidth: '450px' }}>
+      <div className="d-flex px-3 justify-content-between align-items-center">
         <h5>Notification</h5>
         {notify.sound ? (
           <i
@@ -55,9 +49,9 @@ const NotifyModal = () => {
         <div style={{ minHeight: '300px' }} className=" bg-transparent w-100" />
       )}
 
-      <div style={{ maxHeight: 'calc(100vh - 200px)', overflow: 'auto' }}>
+      <div style={{ maxHeight: 'calc(100vh - 200px)' }}>
         {notify.data.map((msg, index) => (
-          <div key={index} className="px-2 mb-3">
+          <div key={index} className="px-3 mb-3">
             <Link
               to={`${msg.url}`}
               className="d-flex text-dark align-items-center"
@@ -65,13 +59,16 @@ const NotifyModal = () => {
             >
               <Avatar src={msg.user.avatar} size="big-avatar" />
 
-              <div className="mx-1 flex-fill">
+              <div className="mx-2 flex-fill">
                 <div>
-                  <strong className="mr-1">{msg.user.username}</strong>
+                  <span style={{ fontWeight: '500' }} className="mr-2">
+                    {msg.user.username}
+                  </span>
                   <span>{msg.text}</span>
                 </div>
                 {msg.content && <small>{msg.content.slice(0, 20)}...</small>}
               </div>
+              {!msg.isRead && <i className="mx-3 fas fa-circle text-primary" />}
 
               {msg.image && (
                 <div style={{ width: '30px' }}>
@@ -83,9 +80,8 @@ const NotifyModal = () => {
                 </div>
               )}
             </Link>
-            <small className="text-muted d-flex justify-content-between px-2">
+            <small className="text-muted mt-2 ml-5 d-flex justify-content-between px-2">
               {moment(msg.createdAt).fromNow()}
-              {!msg.isRead && <i className="fas fa-circle text-primary" />}
             </small>
           </div>
         ))}

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/authAction';
 import { savePost } from '../../redux/actions/postAction';
+import { deleteAllNotifies } from '../../redux/actions/notifyAction';
 
 import Avatar from '../Avatar';
 import NotifyModal from '../NotifyModal';
@@ -47,6 +48,7 @@ const Menu = () => {
   const isActive = (pn) => {
     if (pn === pathname) return 'active';
   };
+
   return (
     <div className="menu">
       <ul className="navbar-nav flex-row">

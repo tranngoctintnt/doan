@@ -14,6 +14,13 @@ export const postDataAPI = async (url, post, token) => {
   return res;
 };
 
+export const postDataChat = async (url, post, token) => {
+  const res = await axios.post(`https://api.chatengine.io/users/`, post, {
+    headers: { 'PRIVATE-KEY': '121675b8-7170-4c89-a378-eb6045080262' },
+  });
+  return res;
+};
+
 export const putDataAPI = async (url, post, token) => {
   const res = await axios.put(`/api/${url}`, post, {
     headers: { Authorization: token },

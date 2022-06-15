@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const SocketServer = require('./socketServer');
-// const { ExpressPeerServer } = require('peer');
+const { ExpressPeerServer } = require('peer');
 // const path = require('path');
 
 const app = express();
@@ -21,15 +21,15 @@ io.on('connection', (socket) => {
 });
 
 // Create peer server
-// ExpressPeerServer(http, { path: '/' });
+ExpressPeerServer(http, { path: '/' });
 
 //Router
 app.use('/api', require('./routes/authRouter'));
 app.use('/api', require('./routes/userRouter'));
 app.use('/api', require('./routes/postRouter'));
 app.use('/api', require('./routes/commentRouter'));
-// app.use('/api', require('./routes/notifyRouter'));
-// app.use('/api', require('./routes/messageRouter'));
+app.use('/api', require('./routes/notifyRouter'));
+app.use('/api', require('./routes/messageRouter'));
 
 const URI = process.env.MONGODB_URL;
 mongoose.connect(
