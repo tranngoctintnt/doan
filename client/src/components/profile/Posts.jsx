@@ -12,33 +12,35 @@ const Posts = ({ auth, id, dispatch, profile }) => {
   const [page, setPage] = useState(0);
   const [load, setLoad] = useState(false);
 
-  // useEffect(() => {
-  //   setLoad(true);
-  //   profile.posts.forEach((data) => {
-  //     if (data._id === id) {
-  //       setPosts(data.posts);
-  //       setResult(data.result);
-  //       setPage(data.page);
-  //       setLoad(false);
-  //     }
-  //   });
-  // }, [profile.posts, id]);
-
   useEffect(() => {
     setLoad(true);
-    getDataAPI(`user_posts/${id}`, auth.token)
-      .then((res) => {
-        setPosts(res.data.posts);
-        setResult(res.data.result);
-        setPage(res.data.page);
+    profile.posts.forEach((data) => {
+      if (data._id === id) {
+        setPosts(data.posts);
+        setResult(data.result);
+        setPage(data.page);
         setLoad(false);
-      })
-      .catch((err) => {
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
-      });
+      }
+    });
+  }, [profile.posts, id]);
 
-    return () => setPosts([]);
-  }, [id, auth.token, dispatch]);
+  // useEffect(() => {
+  //   setLoad(true);
+  //   getDataAPI(`user_posts/${id}`, auth.token)
+  //     .then((res) => {
+  //       // if (res.data.id === id) {
+  //       setPosts(res.data.posts);
+  //       setResult(res.data.result);
+  //       setPage(res.data.page);
+  //       setLoad(false);
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
+  //     });
+
+  //   return () => setPosts([]);
+  // }, [id, auth.token, dispatch]);
 
   const handleLoadMore = async () => {
     setLoad(true);

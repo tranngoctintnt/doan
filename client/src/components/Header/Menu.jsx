@@ -40,6 +40,8 @@ const Menu = () => {
     // },
   ];
 
+  const [load, setLoad] = useState(false);
+
   const { auth, notify } = useSelector((state) => state);
 
   const dispatch = useDispatch();

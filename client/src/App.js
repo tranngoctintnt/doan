@@ -72,7 +72,7 @@ function App() {
       <Fragment>
         <Alert />
         {/* <input type="checkbox" id="theme" /> */}
-        <div className="App">
+        <div className={`App ${(status || modal) && 'mode'}`}>
           <div className="main">
             {/*  */}
             {auth.token && <Header />}
